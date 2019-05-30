@@ -3,7 +3,7 @@ from odoo.tools.translate import _
 from odoo import http
 from odoo import http
 from odoo.http import request
-from tabulate import tabulate
+# from tabulate import tabulate
 import json
 import sys
 import yaml
