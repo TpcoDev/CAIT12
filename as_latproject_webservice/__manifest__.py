@@ -10,7 +10,7 @@ Latproject Webservice Module
 Custom module for Latproject
     """,
     'category' : "Tools",
-    'depends' : ["sale_stock",'webside'],
+    'depends' : ["sale_stock",'website'],
     'website': 'http://www.ahorasoft.com',
     'author' : "Ahorasoft",
     'data' : [
