@@ -44,7 +44,7 @@ class webservice(http.Controller):
                     "proveedor":"indefinido",#proveedor
                     "N_factura":"indefinido",#N_factura
                     "fecha_compra_at":"indefinido",#fecha compra AT
-                    "fecha_asignacion": stock_move.picking_id.date_done #Fecha asignacion
+                    "fecha_asignacion": "indefinido" #Fecha asignacion
                     }
                     ]
                 }
@@ -83,7 +83,7 @@ class webservice(http.Controller):
                     "proveedor":"indefinido",#proveedor
                     "N_factura":"indefinido",#N_factura
                     "fecha_compra_at":"indefinido",#fecha compra AT
-                    "fecha_asignacion": stock_move.picking_id.date_done #Fecha asignacion
+                    "fecha_asignacion": "indefinido" #Fecha asignacion
                     }
                     ]
                 }
