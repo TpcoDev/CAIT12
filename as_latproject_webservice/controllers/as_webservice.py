@@ -58,36 +58,38 @@ class webservice(http.Controller):
         if not current_user:
             return json.dumps({'error': _('Token Invalido')})
         else:
-            stock_picking_model = request.env['stock.picking']
-            # stock_picking_ids = stock_picking_model.sudo().search([], limit=10)
-            stock_picking_ids = stock_picking_model.sudo().search([])
+            json_dict = {"stock_move":[]}
+            stock_move_model = request.env['stock.move']
+            # stock_move_ids = stock_move_model.sudo().search([], limit=10)
+            stock_move_ids = stock_move_model.sudo().search([])
+            
+            for stock_move in stock_move_ids:
 
-        json_dict = {"stock_move":[]}
-        for stock_move in stock_move_ids:
-
-            sm = { stock_move.id:[{                    
-                    "lote":"indefinido", #Lote/N° de serie
-                    "categ_id":stock_move.product_id.product_tmpl_id.categ_id.id, #cod categoria
-                    "categoria":stock_move.product_id.product_tmpl_id.categ_id.name, #categoria
-                    "rut":"indefinido",#rut (sin digito verificador)
-                    "usuario":stock_move.picking_id.partner_id.name, #Nombre usuario
-                    "codigo_marca":"indefinido",#cod Marca
-                    "marca":"indefinido", #Marca
-                    "modelo":"indefinido", #Modelo
-                    "referencia_proveedor":"indefinido",#referencia (proveedor)
-                    "procesador_at":"indefinido", #Procesador_at
-                    "velocidad_at":"indefinido", #Velocidad_at
-                    "memoria_at":"indefinido", #Memoria_at
-                    "hdd_at":"indefinido", #Hdd_at
-                    "costo_compra_at":"indefinido",#Costo compra AT
-                    "proveedor":"indefinido",#proveedor
-                    "N_factura":"indefinido",#N_factura
-                    "fecha_compra_at":"indefinido",#fecha compra AT
-                    "fecha_asignacion": "indefinido" #Fecha asignacion
+                sm = { stock_move.id:[{                    
+                        "lote":"indefinido", #Lote/N° de serie
+                        "categ_id":stock_move.product_id.product_tmpl_id.categ_id.id, #cod categoria
+                        "categoria":stock_move.product_id.product_tmpl_id.categ_id.name, #categoria
+                        "rut":"indefinido",#rut (sin digito verificador)
+                        "usuario":stock_move.picking_id.partner_id.name, #Nombre usuario
+                        "codigo_marca":"indefinido",#cod Marca
+                        "marca":"indefinido", #Marca
+                        "modelo":"indefinido", #Modelo
+                        "referencia_proveedor":"indefinido",#referencia (proveedor)
+                        "procesador_at":"indefinido", #Procesador_at
+                        "velocidad_at":"indefinido", #Velocidad_at
+                        "memoria_at":"indefinido", #Memoria_at
+                        "hdd_at":"indefinido", #Hdd_at
+                        "costo_compra_at":"indefinido",#Costo compra AT
+                        "proveedor":"indefinido",#proveedor
+                        "N_factura":"indefinido",#N_factura
+                        "fecha_compra_at":"indefinido",#fecha compra AT
+                        "fecha_asignacion": "indefinido" #Fecha asignacion
+                        }
+                        ]
                     }
-                    ]
-                }
-            json_dict["stock_move"].append(sm)    
+                json_dict["stock_move"].append(sm)    
+            return json.dumps(json_dict)
+
 
     @http.route(['/webservice/token',], auth="public", type="http")
     def token(self, **post):
