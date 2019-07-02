@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name' : "Ahorasoft Latproject Webservice",
-    'version' : "1.0",
+    'version' : "1.4.1",
     'author'  : "Ahorasoft",
     'description': """
 Latproject Webservice Module
@@ -10,7 +10,7 @@ Latproject Webservice Module
 Custom module for Latproject
     """,
     'category' : "Tools",
-    'depends' : ["sale_stock",'website'],
+    'depends' : ["stock"],
     'website': 'http://www.ahorasoft.com',
     'data' : [
              ],
