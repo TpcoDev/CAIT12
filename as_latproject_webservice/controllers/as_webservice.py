@@ -68,14 +68,20 @@ class webservice(http.Controller):
         json_dict = {"stock_move_line":[]}
         for stock_move in stock_move_ids:
             fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-            if stock_move.x_studio_field_BUaym:
-                fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+            if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                if stock_move.x_studio_field_BUaym:
+                    fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
+            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
+            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
+            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
             sm = { stock_move.reference:[{     
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
-                    "categ_id": as_convert(str(stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj) or "",6,True), #cod categoria
+                    "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
                     "rut": as_convert(str(stock_move.location_dest_id.barcode) or "",9,True,True), #rut (sin digito verificador)
                     "usuario": as_convert(stock_move.location_dest_id.name or "",50), #Nombre usuario
@@ -83,10 +89,10 @@ class webservice(http.Controller):
                     "marca": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_To4X6.x_name or "",20),#Marca
                     "modelo": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_5Bj0L.x_name or "",30), #Modelo
                     "referencia_proveedor": as_convert(stock_move.lot_id.ref or "",30), #referencia (proveedor)
-                    "procesador_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name or "",20), #Procesador_at
-                    "velocidad_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name or "",10), #Velocidad_at
-                    "memoria_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name or "",10), #Memoria_at
-                    "hdd_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name or "",10), #Hdd_at
+                    "procesador_at": as_convert(procesador_at or "",20), #Procesador_at
+                    "velocidad_at": as_convert(velocidad_at or "",10), #Velocidad_at
+                    "memoria_at": as_convert(memoria_at or "",10), #Memoria_at
+                    "hdd_at": as_convert(hdd_at or "",10), #Hdd_at
                     "costo_compra_at": as_convert(str(costo_compra_at) or "",9,True), #Costo compra AT
                     "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                     "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
@@ -118,14 +124,20 @@ class webservice(http.Controller):
             json_dict = {"stock_move_line":[]}
             for stock_move in stock_move_ids:
                 fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-                if stock_move.x_studio_field_BUaym:
-                    fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+                if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                    if stock_move.x_studio_field_BUaym:
+                        fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+                categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+                procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
+                velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
+                memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
+                hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
                 costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
                 fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
                 
                 sm = { stock_move.reference:[{     
                         "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
-                        "categ_id": as_convert(str(stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj) or "",6,True), #cod categoria
+                        "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                         "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
                         "rut": as_convert(str(stock_move.location_dest_id.barcode) or "",9,True,True), #rut (sin digito verificador)
                         "usuario": as_convert(stock_move.location_dest_id.name or "",50), #Nombre usuario
@@ -133,10 +145,10 @@ class webservice(http.Controller):
                         "marca": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_To4X6.x_name or "",20),#Marca
                         "modelo": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_5Bj0L.x_name or "",30), #Modelo
                         "referencia_proveedor": as_convert(stock_move.lot_id.ref or "",30), #referencia (proveedor)
-                        "procesador_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name or "",20), #Procesador_at
-                        "velocidad_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name or "",10), #Velocidad_at
-                        "memoria_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name or "",10), #Memoria_at
-                        "hdd_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name or "",10), #Hdd_at
+                        "procesador_at": as_convert(procesador_at or "",20), #Procesador_at
+                        "velocidad_at": as_convert(velocidad_at or "",10), #Velocidad_at
+                        "memoria_at": as_convert(memoria_at or "",10), #Memoria_at
+                        "hdd_at": as_convert(hdd_at or "",10), #Hdd_at
                         "costo_compra_at": as_convert(str(costo_compra_at) or "",9,True), #Costo compra AT
                         "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                         "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
@@ -149,7 +161,7 @@ class webservice(http.Controller):
             return json.dumps(json_dict)
 
     @http.route('/webservice/stock3', auth='public', type="http")
-    def stock1(self, **post):
+    def stock3(self, **post):
         ids = sql_ids_stock_move_line()
         stock_move_model = request.env['stock.move.line']
         stock_move_ids = stock_move_model.sudo().search([('id','in',ids)])
@@ -159,15 +171,20 @@ class webservice(http.Controller):
         json_dict = []
         for stock_move in stock_move_ids:
             fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-            if stock_move.x_studio_field_BUaym:
-                fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+            if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                if stock_move.x_studio_field_BUaym:
+                    fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
+            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
+            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
+            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
+            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
-            sm = { 
-                    "movimiento": as_convert(stock_move.reference or "",50), #Nombre de movimiento de inventario
+            sm = { stock_move.reference:[{     
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
-                    "categ_id": as_convert(str(stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj) or "",6,True), #cod categoria
+                    "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
                     "rut": as_convert(str(stock_move.location_dest_id.barcode) or "",9,True,True), #rut (sin digito verificador)
                     "usuario": as_convert(stock_move.location_dest_id.name or "",50), #Nombre usuario
@@ -175,15 +192,17 @@ class webservice(http.Controller):
                     "marca": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_To4X6.x_name or "",20),#Marca
                     "modelo": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_5Bj0L.x_name or "",30), #Modelo
                     "referencia_proveedor": as_convert(stock_move.lot_id.ref or "",30), #referencia (proveedor)
-                    "procesador_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name or "",20), #Procesador_at
-                    "velocidad_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name or "",10), #Velocidad_at
-                    "memoria_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name or "",10), #Memoria_at
-                    "hdd_at": as_convert(stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name or "",10), #Hdd_at
+                    "procesador_at": as_convert(procesador_at or "",20), #Procesador_at
+                    "velocidad_at": as_convert(velocidad_at or "",10), #Velocidad_at
+                    "memoria_at": as_convert(memoria_at or "",10), #Memoria_at
+                    "hdd_at": as_convert(hdd_at or "",10), #Hdd_at
                     "costo_compra_at": as_convert(str(costo_compra_at) or "",9,True), #Costo compra AT
                     "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                     "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
                     "fecha_compra_at": as_convert(str(fecha_compra_at) or "",10),#fecha compra AT
-                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion                    
+                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion
+                    }
+                    ]
                 }
             json_dict.append(sm)
         return json.dumps(json_dict)
