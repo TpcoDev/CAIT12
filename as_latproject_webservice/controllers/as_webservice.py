@@ -65,7 +65,7 @@ class webservice(http.Controller):
         user = request.env['res.users']
         tz = user.sudo().search([('login','=','admin')]).tz
 
-        json_dict = {"stock_move_line":[]}
+        json_dict = []
         for stock_move in stock_move_ids:
             fecha_asignacion=stock_move.date.astimezone(timezone(tz))
             if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
@@ -79,7 +79,8 @@ class webservice(http.Controller):
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
-            sm = { stock_move.reference:[{     
+            sm = {
+                    "reference": stock_move.reference,
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
                     "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
@@ -97,11 +98,9 @@ class webservice(http.Controller):
                     "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                     "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
                     "fecha_compra_at": as_convert(str(fecha_compra_at) or "",10),#fecha compra AT
-                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion
-                    }
-                    ]
+                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion                    
                 }
-            json_dict["stock_move_line"].append(sm)
+            json_dict.append(sm)
         return json.dumps(json_dict)
 
     @http.route('/webservice/stock2', auth='public', type="http")
@@ -121,7 +120,7 @@ class webservice(http.Controller):
 
             # stock_move_ids = stock_move_model.sudo().search([('stock_move.lot_id.name','in',request.params['lote'])],limit=500)
 
-            json_dict = {"stock_move_line":[]}
+            json_dict = []
             for stock_move in stock_move_ids:
                 fecha_asignacion=stock_move.date.astimezone(timezone(tz))
                 if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
@@ -135,7 +134,8 @@ class webservice(http.Controller):
                 costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
                 fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
                 
-                sm = { stock_move.reference:[{     
+                sm = {
+                        "reference": stock_move.reference,
                         "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
                         "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                         "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
@@ -153,11 +153,9 @@ class webservice(http.Controller):
                         "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                         "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
                         "fecha_compra_at": as_convert(str(fecha_compra_at) or "",10),#fecha compra AT
-                        "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion
-                        }
-                        ]
+                        "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion                    
                     }
-                json_dict["stock_move_line"].append(sm)
+                json_dict.append(sm)
             return json.dumps(json_dict)
 
     @http.route('/webservice/stock3', auth='public', type="http")
@@ -182,7 +180,8 @@ class webservice(http.Controller):
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
-            sm = { stock_move.reference:[{     
+            sm = {
+                    "reference": stock_move.reference,
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
                     "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
@@ -200,9 +199,7 @@ class webservice(http.Controller):
                     "proveedor": as_convert(stock_move.lot_id.purchase_order_ids[0].partner_id.name if stock_move.lot_id.purchase_order_ids else "",30),#proveedor
                     "N_factura": as_convert(str(stock_move.lot_id.x_studio_n_factura) or "",9,True),#N_factura
                     "fecha_compra_at": as_convert(str(fecha_compra_at) or "",10),#fecha compra AT
-                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion
-                    }
-                    ]
+                    "fecha_asignacion": as_convert(str(fecha_asignacion) or "",10) #Fecha asignacion                    
                 }
             json_dict.append(sm)
         return json.dumps(json_dict)
