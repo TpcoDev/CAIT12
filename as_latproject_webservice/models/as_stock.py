@@ -22,6 +22,18 @@ class StockMoveLine(models.Model):
             sil_obj = self.env['stock.inventory.line'].sudo().search([('inventory_id','=',move.move_id.inventory_id.id),('product_id','=',move.product_id.id),('prod_lot_id','=',move.lot_id.id)],limit=1,order='id desc')
             if sil_obj:
                 if sil_obj.x_studio_fecha_asignacin:
-                    self._cr.execute("""UPDATE stock_move_line SET x_studio_fecha_asignacin ='%s'""" % (datetime.strptime(fields.Datetime.to_string(sil_obj.x_studio_fecha_asignacin), '%Y-%m-%d %H:%M:%S')+ timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S'))                    
+                    self._cr.execute("""
+                        UPDATE 
+                            stock_move_line 
+                        SET 
+                            x_studio_fecha_asignacin ='%s' 
+                        WHERE
+                            product_id = %s
+                            and lot_id = %s
+                            """ % (
+                            (datetime.strptime(fields.Datetime.to_string(sil_obj.x_studio_fecha_asignacin), '%Y-%m-%d %H:%M:%S')+ timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S'),
+                            move.product_id.id,
+                            move.lot_id.id
+                            ) )
 
         return res
