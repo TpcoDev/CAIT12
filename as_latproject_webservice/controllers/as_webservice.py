@@ -68,10 +68,11 @@ class webservice(http.Controller):
         json_dict = []
         for stock_move in stock_move_ids:
             fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-            if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
-                if stock_move.x_studio_field_BUaym:
-                    fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
-            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+            if 'x_studio_fecha_asignacin' in request.env['stock.move.line']._fields:
+            #if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                if stock_move.x_studio_fecha_asignacin:
+                    fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
+            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
             procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
             velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
             memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
@@ -123,10 +124,11 @@ class webservice(http.Controller):
             json_dict = []
             for stock_move in stock_move_ids:
                 fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-                if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
-                    if stock_move.x_studio_field_BUaym:
-                        fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
-                categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+                if 'x_studio_fecha_asignacin' in request.env['stock.move.line']._fields:
+                #if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                    if stock_move.x_studio_fecha_asignacin:
+                        fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
+                categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
                 procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
                 velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
                 memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
@@ -169,10 +171,11 @@ class webservice(http.Controller):
         json_dict = []
         for stock_move in stock_move_ids:
             fecha_asignacion=stock_move.date.astimezone(timezone(tz))
-            if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
-                if stock_move.x_studio_field_BUaym:
-                    fecha_asignacion = stock_move.x_studio_field_BUaym.astimezone(timezone(tz))
-            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_field_B5Yrj if 'x_studio_field_BUaym' in request.env['stock.move']._fields else ''
+            if 'x_studio_fecha_asignacin' in request.env['stock.move.line']._fields:
+            #if 'x_studio_field_BUaym' in request.env['stock.move']._fields:
+                if stock_move.x_studio_fecha_asignacin:
+                    fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
+            categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
             procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
             velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
             memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
@@ -183,7 +186,7 @@ class webservice(http.Controller):
             sm = {
                     "reference": stock_move.reference,
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
-                    "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
+                    "categ_id": as_convert(categ_id,6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
                     "rut": as_convert(str(stock_move.location_dest_id.barcode) or "",9,True,True), #rut (sin digito verificador)
                     "usuario": as_convert(stock_move.location_dest_id.name or "",50), #Nombre usuario
