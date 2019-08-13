@@ -73,10 +73,10 @@ class webservice(http.Controller):
                 if stock_move.x_studio_fecha_asignacin:
                     fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
             categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
-            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
-            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
-            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
-            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
+            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_bTdSr.x_name if 'x_studio_field_bTdSr' in request.env['product.template']._fields else ''
+            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_Ih8aZ.x_name if 'x_studio_field_Ih8aZ' in request.env['product.template']._fields else ''
+            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_2eqXh.x_name if 'x_studio_field_2eqXh' in request.env['product.template']._fields else ''
+            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_9N1hZ.x_name if 'x_studio_field_9N1hZ' in request.env['product.template']._fields else ''
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
@@ -129,10 +129,10 @@ class webservice(http.Controller):
                     if stock_move.x_studio_fecha_asignacin:
                         fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
                 categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
-                procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
-                velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
-                memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
-                hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
+                procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_bTdSr.x_name if 'x_studio_field_bTdSr' in request.env['product.template']._fields else ''
+                velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_Ih8aZ.x_name if 'x_studio_field_Ih8aZ' in request.env['product.template']._fields else ''
+                memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_2eqXh.x_name if 'x_studio_field_2eqXh' in request.env['product.template']._fields else ''
+                hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_9N1hZ.x_name if 'x_studio_field_9N1hZ' in request.env['product.template']._fields else ''
                 costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
                 fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
                 
@@ -176,17 +176,17 @@ class webservice(http.Controller):
                 if stock_move.x_studio_fecha_asignacin:
                     fecha_asignacion = stock_move.x_studio_fecha_asignacin.astimezone(timezone(tz))
             categ_id = stock_move.product_id.product_tmpl_id.categ_id.x_studio_cod_categora_1 if 'x_studio_cod_categora_1' in request.env['product.category']._fields else ''
-            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_E6Mvt.x_name if 'x_studio_field_E6Mvt' in request.env['product.template']._fields else ''
-            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_q1N0G.x_name if 'x_studio_field_q1N0G' in request.env['product.template']._fields else ''
-            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_lNFQG.x_name if 'x_studio_field_lNFQG' in request.env['product.template']._fields else ''
-            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_WRME0.x_name if 'x_studio_field_WRME0' in request.env['product.template']._fields else ''
+            procesador_at = stock_move.product_id.product_tmpl_id.x_studio_field_bTdSr.x_name if 'x_studio_field_bTdSr' in request.env['product.template']._fields else ''
+            velocidad_at = stock_move.product_id.product_tmpl_id.x_studio_field_Ih8aZ.x_name if 'x_studio_field_Ih8aZ' in request.env['product.template']._fields else ''
+            memoria_at = stock_move.product_id.product_tmpl_id.x_studio_field_2eqXh.x_name if 'x_studio_field_2eqXh' in request.env['product.template']._fields else ''
+            hdd_at = stock_move.product_id.product_tmpl_id.x_studio_field_9N1hZ.x_name if 'x_studio_field_9N1hZ' in request.env['product.template']._fields else ''
             costo_compra_at = stock_move.lot_id.purchase_order_ids.amount_total if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_costo_compra
             fecha_compra_at = stock_move.lot_id.purchase_order_ids.date_order if stock_move.lot_id.purchase_order_ids else stock_move.lot_id.x_studio_field_6Pp3S
             
             sm = {
                     "reference": stock_move.reference,
                     "lote": as_convert(str(stock_move.lot_id.name) or "",9,True), #Lote/N° de serie
-                    "categ_id": as_convert(categ_id,6,True), #cod categoria
+                    "categ_id": as_convert(str(categ_id) or "",6,True), #cod categoria
                     "categoria": as_convert(stock_move.product_id.product_tmpl_id.categ_id.name or "",30), #categoria
                     "rut": as_convert(str(stock_move.location_dest_id.barcode) or "",9,True,True), #rut (sin digito verificador)
                     "usuario": as_convert(stock_move.location_dest_id.name or "",50), #Nombre usuario
