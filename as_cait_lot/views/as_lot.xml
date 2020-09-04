@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree ventas, campos adicionales -->
+        <record id="as_stock_lote_tree" model="ir.ui.view">
+            <field name="name">stock.production.lot_tree</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='main_group']" position="inside">
+                    <field name="as_quant_ids" string="Movimientos de Lote" domain="[('location_id.usage','=','internal'),('quantity','>',0)]">
+                        <tree string="Inventory Valuation" create="0" delete="0" decoration-danger="quantity &lt; 0" domain="[('location_id.usage','=','internal'),('quantity','>',0)]">
+                            <field name="product_id" domain="[[&quot;property_stock_inventory.usage&quot;,&quot;=&quot;,&quot;internal&quot;]]"/>
+                            <field name="location_id" />
+                            <field name="x_studio_direccin_jerrquica" string="Dirección Jerárquica" />
+                            <field name="lot_id" groups="stock.group_production_lot" />
+                            <field name="x_studio_n_factura" string="N Factura" />
+                            <field name="package_id" groups="stock.group_tracking_lot" />
+                            <field name="owner_id" groups="stock.group_tracking_owner" />
+                            <field name="reserved_quantity" string="Reserved" />
+                            <field name="quantity" string="On Hand" attrs="{}" />
+                            <field name="product_uom_id" groups="uom.group_uom" />
+                            <field name="company_id" groups="base.group_multi_company" />
+                        </tree>
+                        <form string="Inventory Valuation" create="false" edit="false" delete="false">
+                            <sheet name="studio_sheet_42229b">
+                                <div class="oe_button_box" name="button_box">
+                                    <button class="oe_stat_button" icon="fa-arrows-v" type="object"
+                                        name="action_view_stock_moves" string="Picking Moves" />
+                                </div>
+                                <group name="studio_group_dff932">
+                                    <group name="studio_group_2aa5cc">
+                                        <field name="product_id" />
+                                        <field name="location_id" />
+                                        <field name="lot_id" groups="stock.group_production_lot" />
+                                        <field name="removal_date" />
+                                        <field name="package_id" groups="stock.group_tracking_lot" />
+                                        <field name="owner_id" groups="stock.group_tracking_owner" />
+                                    </group>
+                                    <group name="studio_group_ea8d8d">
+                                        <label for="quantity" string="Quantity On Hand" />
+                                        <div class="o_row" name="studio_div_1b49fb">
+                                            <field name="quantity" />
+                                            <field name="product_uom_id" groups="uom.group_uom" />
+                                        </div>
+                                        <label for="reserved_quantity" string="Quantity Reserved" />
+                                        <div class="o_row" name="studio_div_420474">
+                                            <field name="reserved_quantity" />
+                                            <field name="product_uom_id" groups="uom.group_uom" />
+                                        </div>
+                                        <field name="in_date" attrs="{'invisible': [('lot_id', '=', False)]}"
+                                            groups="stock.group_production_lot" />
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
