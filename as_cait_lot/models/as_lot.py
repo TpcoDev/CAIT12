@@ -14,5 +14,5 @@ class as_HelpdeskTicket(models.Model):
 class as_HelpdeskTicket(models.Model):
     _inherit = 'stock.quant'
 
-    as_studio_direccin_jerrquica = fields.Char(string='Dirección Jerárquica')
-    as_studio_n_factura = fields.Char(string='N Factura')
+    x_studio_direccin_jerrquica = fields.Char(string='Dirección Jerárquica')
+    x_studio_n_factura = fields.Char(string='N Factura')

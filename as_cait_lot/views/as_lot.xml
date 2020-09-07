@@ -12,9 +12,9 @@
                         <tree string="Inventory Valuation" editable="buttom" create="0" delete="0" decoration-danger="quantity &lt; 0" domain="[('location_id.usage','=','internal'),('quantity','>',0)]">
                             <field name="product_id" domain="[[&quot;property_stock_inventory.usage&quot;,&quot;=&quot;,&quot;internal&quot;]]"/>
                             <field name="location_id" />
-                            <field name="as_studio_direccin_jerrquica" string="Dirección Jerárquica" />
+                            <field name="x_studio_direccin_jerrquica" string="Dirección Jerárquica" />
                             <field name="lot_id" groups="stock.group_production_lot" />
-                            <field name="as_studio_n_factura" string="N Factura" />
+                            <field name="x_studio_n_factura" string="N Factura" />
                             <field name="package_id" groups="stock.group_tracking_lot" />
                             <field name="owner_id" groups="stock.group_tracking_owner" />
                             <field name="reserved_quantity" string="Reserved" />
