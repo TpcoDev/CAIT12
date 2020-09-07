@@ -5,9 +5,9 @@
     "images": [],
     "version": "1.0.0",
     "application": True,
-    "author": "Ahorasoft",
-    "support": "soporte@ahorasoft.com",
-    "website": "http://www.ahorasoft.com",
+    "author": "TPCO",
+    "support": "tpco@tpco.cl",
+    "website": "www.tpco.cl",
     "depends": [
         "stock",
         "sale",
