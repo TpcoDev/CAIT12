@@ -16,6 +16,7 @@
     ],
     'data': [
         'views/as_lot.xml',
+        'views/as_stock_picking.xml',
         # 'security/ir.model.access.csv',
     ],
     "auto_install": False,
