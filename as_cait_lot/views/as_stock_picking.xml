@@ -10,7 +10,7 @@
                     decoration-danger="qty_done&gt;product_uom_qty and state!='done'"
                     decoration-success="qty_done==product_uom_qty and state!='done' and not result_package_id">
                     <field name="lot_id" groups="stock.group_production_lot"
-                        attrs="{'column_invisible': [('parent.show_lots_text', '=', True)], 'invisible': [('lots_visible', '=', False)]}" options="{'no_create': True, 'no_edit': True}"
+                        attrs="{'column_invisible': [('parent.show_lots_text', '=', True)], 'invisible': [('lots_visible', '=', False)]}" options="{'no_create': True, 'no_edit': True}" domain="[('as_quant_ids.location_id', '=', location_id),('as_quant_ids.quantity', '>', 0)]"
                         />
                     <field name="product_id" required="1"
                         attrs="{'readonly': ['|', ('state', '=', 'done'), ('move_id', '!=', False)]}" />
@@ -42,6 +42,12 @@
                         force_save="1" />
                 </tree>
             </xpath>
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="attributes">
+               <attribute name="domain">[('stock_quant_ids.location_id', '=', location_id),('stock_quant_ids.quantity', '>', 0)]</attribute>
+            </xpath>
+             <!-- <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+               <field name="domain" invisible="0" />
+            </xpath> -->
         </field>
     </record>
 </odoo>

@@ -3,7 +3,7 @@
     "summary": "Cait",
     "category": "stock",
     "images": [],
-    "version": "1.0.0",
+    "version": "1.0.2",
     "application": True,
     "author": "TPCO",
     "support": "tpco@tpco.cl",
